@@ -28,6 +28,9 @@ variables:
   landing_path:
     description: Ruta del Volume donde Auto Loader lee los lotes de clientes
     default: /Volumes/dbassociate/default/vol_landing/input/
+  landing_path_dev:
+    description: Ruta del Volume donde Auto Loader lee los lotes de clientes
+    default: /Volumes/dbassociate_dev/default/vol_landing/input/
 
 targets:
   dev:
@@ -45,11 +48,11 @@ targets:
     presets:
       source_linked_deployment: false
     workspace:
-      host: <url-del-otro-workspace>
+      host: https://adb-7405616274977425.5.azuredatabricks.net/
       root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
     variables:
       catalog: dbassociate_dev
-      landing_path: /Volumes/dbassociate_dev/default/vol_landing/input/
+      landing_path: ${var.landing_path_dev}
     permissions:
       - user_name: ${workspace.current_user.userName}
         level: CAN_MANAGE
